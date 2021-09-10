@@ -13,9 +13,31 @@ const Grouptable = () => {
   // }, []);
 
   return (
-    <div>
-      {" "}
-      <GroupMemberBar />{" "}
+    <div className="bar">
+      <div className="container bootstrap snippets bootdey">
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="main-box no-header clearfix">
+              <div className="main-box-body clearfix">
+                <div className="table-responsive container">
+                  <button type="button" class="btn btn-success">
+                    SAVE ALL
+                  </button>
+                  <GroupMemberBar
+                    name="Howard Warren"
+                    hours="30"
+                    placements="5"
+                    video="3"
+                    returns="6"
+                    studies="9"
+                    notes="Hello how are you"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
