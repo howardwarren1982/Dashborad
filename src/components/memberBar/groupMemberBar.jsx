@@ -5,10 +5,15 @@ const GroupMemberBar = (props) => {
   let inputBox = document.querySelectorAll("input");
   let inputBoxSibling = document.querySelectorAll("input ~ h3");
 
-  function handleClick(e) {
+  const handleClick = (e) => {
     e.preventDefault();
-    console.log({ inputBox, inputBoxSibling });
-  }
+    const newPub = {
+      title: title,
+      director: director,
+    };
+    axios.post("/create", newPub);
+    console.log("done");
+  };
 
   let { name, hours, placements, video, returns, studies, notes } = props;
 
