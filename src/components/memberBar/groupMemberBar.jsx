@@ -2,17 +2,31 @@ import React from "react";
 import "../memberBar/memberBar.style.scss";
 
 const GroupMemberBar = (props) => {
-  let inputBox = document.querySelectorAll("input");
-  let inputBoxSibling = document.querySelectorAll("input ~ h3");
-
   const handleClick = (e) => {
     e.preventDefault();
-    const newPub = {
-      title: title,
-      director: director,
-    };
-    axios.post("/create", newPub);
-    console.log("done");
+    let inputBox = document.querySelectorAll("input");
+    let inputBoxSibling = document.querySelectorAll("input ~ h3");
+
+    function inputBoxToObject(inputBox) {
+      let obj = {};
+      inputBox.forEach((input, i) => {
+        obj[i] = input.value;
+      });
+      return obj;
+    }
+
+    const output = inputBoxToObject(inputBox);
+    console.log(output);
+    //save to json file in the root called group-time.json
+    let data = JSON.stringify(output);
+    //save JSON string to a local file in the browser
+    let blob = new Blob([data], { type: "application/json" });
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = "group-time.json";
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   let { name, hours, placements, video, returns, studies, notes } = props;
@@ -50,7 +64,7 @@ const GroupMemberBar = (props) => {
             <h3>{name}</h3>
             <input
               type="text"
-              class="form-control name-input"
+              className="form-control name-input"
               id="basic-url"
               aria-describedby="basic-addon3"
             ></input>
@@ -59,7 +73,7 @@ const GroupMemberBar = (props) => {
             <h3>{hours}</h3>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             ></input>
@@ -68,7 +82,7 @@ const GroupMemberBar = (props) => {
             <h3>{placements}</h3>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             ></input>
@@ -77,7 +91,7 @@ const GroupMemberBar = (props) => {
             <h3>{video}</h3>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             ></input>
@@ -86,7 +100,7 @@ const GroupMemberBar = (props) => {
             <h3>{returns}</h3>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             ></input>
@@ -95,7 +109,7 @@ const GroupMemberBar = (props) => {
             <h3>{studies}</h3>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             ></input>
@@ -104,16 +118,16 @@ const GroupMemberBar = (props) => {
             <p>{notes}</p>
             <input
               type="text"
-              class="form-control note-input"
+              className="form-control note-input"
               id="basic-url"
               aria-describedby="basic-addon3"
             ></input>
           </td>
         </tbody>
-        <button type="button" class="btn btn-danger">
+        <button type="button" className="btn btn-danger">
           Delete
         </button>
-        <button type="button" class="btn btn-success" onClick={handleClick}>
+        <button type="button" className="btn btn-success" onClick={handleClick}>
           Save
         </button>
       </table>
