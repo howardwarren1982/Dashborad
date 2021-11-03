@@ -2,15 +2,18 @@ import React from "react";
 import axios from "axios";
 import { GOOGLE_SHEET_ID, SHEET_ONE, PRIVATE_KEY, CLIENT_EMAIL } from "../env";
 import GroupMemberBar from "./memberBar/groupMemberBar";
+import data from "../group-time.json";
 
 const Grouptable = () => {
-  // const [post, setPost] = React.useState(null);
+  //setup state hook
+  const [groupData, setGroupData] = React.useState([]);
 
-  // React.useEffect(() => {
-  //   axios.get(baseURL).then((response) => {
-  //     setPost(response.data);
-  //   });
-  // }, []);
+  //set groupData to data from json file
+  React.useEffect(() => {
+    setGroupData(data);
+  }, []);
+
+  console.log(groupData);
 
   return (
     <div className="bar">
