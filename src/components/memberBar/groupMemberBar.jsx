@@ -62,12 +62,6 @@ const GroupMemberBar = (props) => {
         <tbody>
           <td>
             <h3>{name}</h3>
-            <input
-              type="text"
-              className="form-control name-input"
-              id="basic-url"
-              aria-describedby="basic-addon3"
-            ></input>
           </td>
           <td>
             <h3>{hours}</h3>
@@ -127,8 +121,12 @@ const GroupMemberBar = (props) => {
         <button type="button" className="btn btn-danger">
           Delete
         </button>
-        <button type="button" className="btn btn-success" onClick={handleClick}>
-          Save
+        <button
+          type="button"
+          className="btn btn-success update"
+          onClick={handleClick}
+        >
+          Update
         </button>
       </table>
     </div>

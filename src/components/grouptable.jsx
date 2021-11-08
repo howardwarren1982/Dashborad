@@ -1,19 +1,25 @@
-import React from "react";
-import axios from "axios";
-import { GOOGLE_SHEET_ID, SHEET_ONE, PRIVATE_KEY, CLIENT_EMAIL } from "../env";
+import React, { useState } from "react";
 import GroupMemberBar from "./memberBar/groupMemberBar";
 import data from "../group-time.json";
 
 const Grouptable = () => {
   //setup state hook
-  const [groupData, setGroupData] = React.useState([]);
+  const [groupData, setGroupData] = useState([data]);
+  const testArray = [0, 1, 2, 3, 4];
+  console.log(groupData);
+
+  //function to export groupData to json file
+  function exportGroupData() {
+    const data = JSON.stringify(groupData);
+    const blob = new Blob([data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "group-time.json";
+    a.click();
+  }
 
   //set groupData to data from json file
-  React.useEffect(() => {
-    setGroupData(data);
-  }, []);
-
-  console.log(groupData);
 
   return (
     <div className="bar">
@@ -23,18 +29,26 @@ const Grouptable = () => {
             <div className="main-box no-header clearfix">
               <div className="main-box-body clearfix">
                 <div className="table-responsive container">
-                  <button type="button" class="btn btn-success">
+                  <button
+                    type="button"
+                    class="btn btn-success save-all"
+                    onClick={exportGroupData}
+                  >
                     SAVE ALL
                   </button>
-                  <GroupMemberBar
-                    name="Howard Warren"
-                    hours="30"
-                    placements="5"
-                    video="3"
-                    returns="6"
-                    studies="9"
-                    notes="Hello how are you"
-                  />
+                  {console.log(groupData)}
+                  {groupData[0].dataOutput.map((group, index) => (
+                    <GroupMemberBar
+                      key={index}
+                      name={group.name}
+                      hours={group.hours}
+                      placements={group.place}
+                      video={group.vid}
+                      returns={group.returns}
+                      studies={group.studies}
+                      notes={group.notes}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
