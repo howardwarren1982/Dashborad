@@ -4,29 +4,20 @@ import "../memberBar/memberBar.style.scss";
 const GroupMemberBar = (props) => {
   const handleClick = (e) => {
     e.preventDefault();
-    let inputBox = document.querySelectorAll("input");
-    let inputBoxSibling = document.querySelectorAll("input ~ h3");
 
-    function inputBoxToObject(inputBox) {
-      let obj = {};
-      inputBox.forEach((input, i) => {
-        obj[i] = input.value;
-      });
-      return obj;
+    const form = document.querySelectorAll(".form-control");
+    const h3 = document.querySelectorAll(".output");
+    //loop through the form-control values and set nearest h3 to the value
+    for (let i = 0; i < form.length; i++) {
+      if (form[i].value === "") {
+        h3[i].innerHTML = h3[i].innerHTML;
+        continue;
+      }
+      h3[i].innerHTML = form[i].value;
     }
 
-    const output = inputBoxToObject(inputBox);
-    console.log(output);
-    //save to json file in the root called group-time.json
-    let data = JSON.stringify(output);
-    //save JSON string to a local file in the browser
-    let blob = new Blob([data], { type: "application/json" });
-    let url = URL.createObjectURL(blob);
-    let a = document.createElement("a");
-    a.href = url;
-    a.download = "group-time.json";
-    a.click();
-    URL.revokeObjectURL(url);
+    //load a json file
+    const xhr = new XMLHttpRequest();
   };
 
   let { name, hours, placements, video, returns, studies, notes } = props;
@@ -64,7 +55,16 @@ const GroupMemberBar = (props) => {
             <h3>{name}</h3>
           </td>
           <td>
-            <h3>{hours}</h3>
+            <h3 className="output">{hours}</h3>
+            <input
+              type="text"
+              className="form-control input"
+              id="basic-url"
+              aria-describedby="basic-addon3"
+            ></input>
+          </td>
+          <td>
+            <h3 className="output">{placements}</h3>
             <input
               type="text"
               className="form-control"
@@ -73,7 +73,7 @@ const GroupMemberBar = (props) => {
             ></input>
           </td>
           <td>
-            <h3>{placements}</h3>
+            <h3 className="output">{video}</h3>
             <input
               type="text"
               className="form-control"
@@ -82,7 +82,7 @@ const GroupMemberBar = (props) => {
             ></input>
           </td>
           <td>
-            <h3>{video}</h3>
+            <h3 className="output">{returns}</h3>
             <input
               type="text"
               className="form-control"
@@ -91,7 +91,7 @@ const GroupMemberBar = (props) => {
             ></input>
           </td>
           <td>
-            <h3>{returns}</h3>
+            <h3 className="output">{studies}</h3>
             <input
               type="text"
               className="form-control"
@@ -100,16 +100,7 @@ const GroupMemberBar = (props) => {
             ></input>
           </td>
           <td>
-            <h3>{studies}</h3>
-            <input
-              type="text"
-              className="form-control"
-              id="basic-url"
-              aria-describedby="basic-addon3"
-            ></input>
-          </td>
-          <td>
-            <p>{notes}</p>
+            <p className="output">{notes}</p>
             <input
               type="text"
               className="form-control note-input"
