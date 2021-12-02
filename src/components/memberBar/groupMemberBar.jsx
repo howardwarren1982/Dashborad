@@ -1,5 +1,8 @@
 import React from "react";
 import "../memberBar/memberBar.style.scss";
+import XLSX from "xlsx";
+
+const Excel = require("exceljs");
 
 const GroupMemberBar = (props) => {
   const handleClick = (e) => {
@@ -16,10 +19,12 @@ const GroupMemberBar = (props) => {
       h3[i].innerHTML = form[i].value;
     }
 
-    //load a json file
-    const xhr = new XMLHttpRequest();
-  };
+    let groupData;
 
+    function exTest() {}
+
+    exTest();
+  };
   let { name, hours, placements, video, returns, studies, notes } = props;
 
   return (
@@ -123,5 +128,4 @@ const GroupMemberBar = (props) => {
     </div>
   );
 };
-
 export default GroupMemberBar;

@@ -5,8 +5,6 @@ import data from "../group-time.json";
 const Grouptable = () => {
   //setup state hook
   const [groupData, setGroupData] = useState([data]);
-  const testArray = [0, 1, 2, 3, 4];
-  console.log(groupData);
 
   //function to export groupData to json file
   function exportGroupData() {
@@ -36,7 +34,7 @@ const Grouptable = () => {
                   >
                     SAVE ALL
                   </button>
-                  {console.log(groupData)}
+
                   {groupData[0].dataOutput.map((group, index) => (
                     <GroupMemberBar
                       key={index}
